@@ -1,4 +1,4 @@
-package com.elephantstudio.odrabiamyszare
+package com.elephantstudio.odrabiamyszare.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.elephantstudio.odrabiamyszare.R
 import com.elephantstudio.odrabiamyszare.databinding.FragmentSecondBinding
 
 /**

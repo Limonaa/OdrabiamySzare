@@ -1,4 +1,4 @@
-package com.elephantstudio.odrabiamyszare
+package com.elephantstudio.odrabiamyszare.data
 
 data class Book(
     val title: String,
