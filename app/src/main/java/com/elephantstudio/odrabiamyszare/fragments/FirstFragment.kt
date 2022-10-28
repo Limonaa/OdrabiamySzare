@@ -31,24 +31,7 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
-
-
-        lifecycleScope.launchWhenCreated {
-            val response = try {
-                RetrofitInstance.api.getBooks()
-            } catch (e: IOException) {
-                Log.e(TAG, "IOException, you might not have internet connection")
-                return@launchWhenCreated
-            } catch (e: HttpException) {
-                Log.e(TAG, "HttpException, unexpected response")
-                return@launchWhenCreated
-            }
-            if (response.isSuccessful && response.body() != null) {
-                booksAdapter.booksAPI = response.body()!!
-            } else {
-                Log.e(TAG, "Response not successful")
-            }
-        }
+        setupRecyclerView()
 
 
         return binding.root
@@ -56,6 +39,23 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        lifecycleScope.launchWhenCreated {
+            val response = try {
+                RetrofitInstance.api.getBooks()
+            } catch(e: IOException) {
+                Log.e(TAG, "IOException, you might not have internet connection")
+                return@launchWhenCreated
+            } catch (e: HttpException) {
+                Log.e(TAG, "HttpException, unexpected response")
+                return@launchWhenCreated
+            }
+            if(response.isSuccessful && response.body() != null) {
+                booksAdapter.booksAPI = response.body()!!
+            } else {
+                Log.e(TAG, "Response not successful")
+            }
+        }
 
     }
 

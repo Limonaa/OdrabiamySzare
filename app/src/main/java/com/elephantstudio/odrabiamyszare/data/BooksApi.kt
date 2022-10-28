@@ -7,5 +7,5 @@ import retrofit2.http.Query
 interface BooksApi {
 
     @GET("/books")
-    suspend fun getBooks(): Response<List<Book>>
+    suspend fun getBooks(): Response<List<BookJSON>>
 }
