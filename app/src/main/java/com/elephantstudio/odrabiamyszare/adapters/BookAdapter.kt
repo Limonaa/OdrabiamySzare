@@ -6,8 +6,6 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.elephantstudio.odrabiamyszare.data.Book
-import com.elephantstudio.odrabiamyszare.data.BookJSON
-import com.elephantstudio.odrabiamyszare.data.BooksApi
 import com.elephantstudio.odrabiamyszare.databinding.ItemBookBinding
 
 
@@ -15,18 +13,18 @@ class BookAdapter(): RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
 
     inner class BookViewHolder(val binding: ItemBookBinding): RecyclerView.ViewHolder(binding.root)
 
-    private val diffCallback = object : DiffUtil.ItemCallback<BookJSON>() {
-        override fun areItemsTheSame(oldItem: BookJSON, newItem: BookJSON): Boolean {
+    private val diffCallback = object : DiffUtil.ItemCallback<Book>() {
+        override fun areItemsTheSame(oldItem: Book, newItem: Book): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: BookJSON, newItem: BookJSON): Boolean {
+        override fun areContentsTheSame(oldItem: Book, newItem: Book): Boolean {
             return oldItem == newItem
         }
     }
 
     private val differ = AsyncListDiffer(this, diffCallback)
-    var booksAPI: List<BookJSON>
+    var books: List<Book>
         get() = differ.currentList
         set(value) {differ.submitList(value)}
 
@@ -37,13 +35,13 @@ class BookAdapter(): RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
 
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
 
-        holder.binding.tvBookTitle.text = booksAPI[position].title
-        holder.binding.tvBookType.text = booksAPI[position].subject
-        holder.binding.tvBookPublish.text = booksAPI[position].type
+        holder.binding.tvBookTitle.text = books[position].title
+        holder.binding.tvBookType.text = books[position].subject
+        holder.binding.tvBookPublish.text = books[position].type
     }
 
     override fun getItemCount(): Int {
 
-        return booksAPI.size
+        return books.size
     }
 }

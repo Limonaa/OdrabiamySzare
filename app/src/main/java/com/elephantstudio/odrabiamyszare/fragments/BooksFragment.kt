@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.elephantstudio.odrabiamyszare.data.Book
 import com.elephantstudio.odrabiamyszare.adapters.BookAdapter
 import com.elephantstudio.odrabiamyszare.R
 import com.elephantstudio.odrabiamyszare.RetrofitInstance
@@ -16,7 +15,7 @@ import com.elephantstudio.odrabiamyszare.databinding.FragmentFirstBinding
 import retrofit2.HttpException
 import java.io.IOException
 
-const val TAG = "FirstFragment"
+const val TAG = "BooksFragment"
 
 class FirstFragment : Fragment(R.layout.fragment_first) {
 
@@ -51,12 +50,11 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
                 return@launchWhenCreated
             }
             if(response.isSuccessful && response.body() != null) {
-                booksAdapter.booksAPI = response.body()!!
+                booksAdapter.books = response.body()!!
             } else {
                 Log.e(TAG, "Response not successful")
             }
         }
-
     }
 
     override fun onDestroyView() {
