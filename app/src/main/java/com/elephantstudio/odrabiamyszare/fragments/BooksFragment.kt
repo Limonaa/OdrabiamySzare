@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.elephantstudio.odrabiamyszare.adapters.BookAdapter
 import com.elephantstudio.odrabiamyszare.R
@@ -38,6 +39,10 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        booksAdapter.setOnItemClickListener {
+            Log.e("ITEMCLICKLISTENER", "Clicked on item")
+        }
 
         lifecycleScope.launchWhenCreated {
             val response = try {

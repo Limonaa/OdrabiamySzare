@@ -38,10 +38,22 @@ class BookAdapter(): RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
         holder.binding.tvBookTitle.text = books[position].title
         holder.binding.tvBookType.text = books[position].subject
         holder.binding.tvBookPublish.text = books[position].type
+
+        holder.binding.root.setOnClickListener {
+            onItemClickListener?.let {
+                it(books[position])
+            }
+        }
     }
 
     override fun getItemCount(): Int {
 
         return books.size
+    }
+
+    private var onItemClickListener: ((Book) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Book) -> Unit) {
+        onItemClickListener = listener
     }
 }
