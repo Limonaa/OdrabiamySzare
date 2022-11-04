@@ -12,15 +12,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.elephantstudio.odrabiamyszare.adapters.BookAdapter
 import com.elephantstudio.odrabiamyszare.R
 import com.elephantstudio.odrabiamyszare.RetrofitInstance
-import com.elephantstudio.odrabiamyszare.databinding.FragmentFirstBinding
+import com.elephantstudio.odrabiamyszare.databinding.FragmentBooksBinding
 import retrofit2.HttpException
 import java.io.IOException
 
 const val TAG = "BooksFragment"
 
-class FirstFragment : Fragment(R.layout.fragment_first) {
+class FirstFragment : Fragment(R.layout.fragment_books) {
 
-    private var _binding: FragmentFirstBinding? = null
+    private var _binding: FragmentBooksBinding? = null
 
     private val binding get() = _binding!!
 
@@ -30,7 +30,7 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        _binding = FragmentBooksBinding.inflate(inflater, container, false)
         setupRecyclerView()
 
 
@@ -41,7 +41,13 @@ class FirstFragment : Fragment(R.layout.fragment_first) {
         super.onViewCreated(view, savedInstanceState)
 
         booksAdapter.setOnItemClickListener {
-            Log.e("ITEMCLICKLISTENER", "Clicked on item")
+            val bundle = Bundle().apply {
+                putSerializable("book", it)
+            }
+            findNavController().navigate(
+                R.id.action_BooksFragment_to_ExercisesFragment,
+                bundle
+            )
         }
 
         lifecycleScope.launchWhenCreated {
