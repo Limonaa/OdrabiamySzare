@@ -5,4 +5,4 @@ data class Book(
     val subject: String,
     val title: String,
     val type: String
-)
+): java.io.Serializable
