@@ -38,6 +38,7 @@ class BookAdapter(): RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
         holder.binding.tvBookTitle.text = books[position].title
         holder.binding.tvBookType.text = books[position].subject
         holder.binding.tvBookPublish.text = books[position].type
+        holder.binding.tvIconLetter.text = books[position].title.first().toString()
 
         holder.binding.root.setOnClickListener {
             onItemClickListener?.let {
