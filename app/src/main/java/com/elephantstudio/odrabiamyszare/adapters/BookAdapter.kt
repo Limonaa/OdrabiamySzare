@@ -2,11 +2,14 @@ package com.elephantstudio.odrabiamyszare.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.elephantstudio.odrabiamyszare.R
 import com.elephantstudio.odrabiamyszare.data.Book
 import com.elephantstudio.odrabiamyszare.databinding.ItemBookBinding
+
 
 
 class BookAdapter(): RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
@@ -39,6 +42,8 @@ class BookAdapter(): RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
         holder.binding.tvBookType.text = books[position].subject
         holder.binding.tvBookPublish.text = books[position].type
         holder.binding.tvIconLetter.text = books[position].title.first().toString()
+        val fragmentContext = holder.binding.vShape.context
+        holder.binding.vShape.backgroundTintList = AppCompatResources.getColorStateList(fragmentContext, R.color.green)
 
         holder.binding.root.setOnClickListener {
             onItemClickListener?.let {
