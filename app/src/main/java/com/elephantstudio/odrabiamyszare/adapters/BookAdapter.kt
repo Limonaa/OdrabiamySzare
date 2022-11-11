@@ -2,9 +2,11 @@ package com.elephantstudio.odrabiamyszare.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.elephantstudio.odrabiamyszare.R
 import com.elephantstudio.odrabiamyszare.data.Book
 import com.elephantstudio.odrabiamyszare.databinding.ItemBookBinding
 
@@ -35,13 +37,34 @@ class BookAdapter(): RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
 
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
 
+        holder.binding.apply {
+            tvBookTitle.text = books[position].title
+        }
+
         holder.binding.tvBookTitle.text = books[position].title
         holder.binding.tvBookType.text = books[position].subject
         holder.binding.tvBookPublish.text = books[position].type
+        holder.binding.tvIconLetter.text = books[position].title.first().toString()
+        val fragmentContext = holder.binding.vShape.context
+        val colorList = listOf(R.color.redIcon, R.color.purpleIcon, R.color.blueIcon, R.color.tealIcon, R.color.limeIcon, R.color.orangeIcon, R.color.deepOrangeIcon, R.color.indigoIcon)
+        val colorId = colorList[(books[position].title.length + books[position].type.length) % colorList.size]
+        holder.binding.vShape.backgroundTintList = AppCompatResources.getColorStateList(fragmentContext, colorId)
+
+        holder.binding.root.setOnClickListener {
+            onItemClickListener?.let {
+                it(books[position])
+            }
+        }
     }
 
     override fun getItemCount(): Int {
 
         return books.size
+    }
+
+    private var onItemClickListener: ((Book) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Book) -> Unit) {
+        onItemClickListener = listener
     }
 }

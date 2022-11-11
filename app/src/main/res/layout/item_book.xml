@@ -3,31 +3,60 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="90dp">
+    android:layout_height="90dp"
+    android:background="?selectableItemBackground">
+
+    <View
+        android:id="@+id/vShape"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/shape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvIconLetter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="M"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        android:textAllCaps="true"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/vShape"
+        app:layout_constraintEnd_toEndOf="@+id/vShape"
+        app:layout_constraintStart_toStartOf="@+id/vShape"
+        app:layout_constraintTop_toTopOf="@+id/vShape" />
 
     <TextView
         android:id="@+id/tvBookTitle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:ellipsize="end"
-        android:lines="1"
+        android:maxWidth="320dp"
+        android:maxLines="1"
         android:padding="6dp"
         android:text="MAteMAtyka 1. Zakres podstawowy"
         android:textColor="@color/text"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/vShape"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvBookType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:padding="6dp"
         android:text="Podręcznik"
@@ -35,12 +64,14 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/view"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/vShape"
+        app:layout_constraintTop_toBottomOf="@+id/tvBookTitle" />
 
     <TextView
         android:id="@+id/tvBookPublish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:padding="6dp"
@@ -49,7 +80,8 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvBookTitle" />
 
     <View
         android:id="@+id/view"
