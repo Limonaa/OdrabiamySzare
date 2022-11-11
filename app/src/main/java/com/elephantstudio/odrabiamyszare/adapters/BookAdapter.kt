@@ -11,7 +11,6 @@ import com.elephantstudio.odrabiamyszare.data.Book
 import com.elephantstudio.odrabiamyszare.databinding.ItemBookBinding
 
 
-
 class BookAdapter(): RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
 
     inner class BookViewHolder(val binding: ItemBookBinding): RecyclerView.ViewHolder(binding.root)
@@ -38,12 +37,18 @@ class BookAdapter(): RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
 
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
 
+        holder.binding.apply {
+            tvBookTitle.text = books[position].title
+        }
+
         holder.binding.tvBookTitle.text = books[position].title
         holder.binding.tvBookType.text = books[position].subject
         holder.binding.tvBookPublish.text = books[position].type
         holder.binding.tvIconLetter.text = books[position].title.first().toString()
         val fragmentContext = holder.binding.vShape.context
-        holder.binding.vShape.backgroundTintList = AppCompatResources.getColorStateList(fragmentContext, R.color.green)
+        val colorList = listOf(R.color.redIcon, R.color.purpleIcon, R.color.blueIcon, R.color.tealIcon, R.color.limeIcon, R.color.orangeIcon, R.color.deepOrangeIcon, R.color.indigoIcon)
+        val colorId = colorList[(books[position].title.length + books[position].type.length) % colorList.size]
+        holder.binding.vShape.backgroundTintList = AppCompatResources.getColorStateList(fragmentContext, colorId)
 
         holder.binding.root.setOnClickListener {
             onItemClickListener?.let {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="90dp"
     android:background="?selectableItemBackground">
@@ -22,8 +23,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="M"
+        android:textColor="@color/white"
         android:textSize="28sp"
-        android:textStyle="bold"
         android:textAllCaps="true"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/vShape"
@@ -34,11 +35,12 @@
     <TextView
         android:id="@+id/tvBookTitle"
         android:layout_width="wrap_content"
-        android:maxWidth="320dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:ellipsize="end"
+        android:maxWidth="320dp"
         android:maxLines="1"
         android:padding="6dp"
         android:text="MAteMAtyka 1. Zakres podstawowy"
@@ -53,6 +55,7 @@
         android:id="@+id/tvBookType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:padding="6dp"
@@ -61,7 +64,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/tvBookTitle"
+        app:layout_constraintStart_toEndOf="@+id/vShape"
         app:layout_constraintTop_toBottomOf="@+id/tvBookTitle" />
 
     <TextView
