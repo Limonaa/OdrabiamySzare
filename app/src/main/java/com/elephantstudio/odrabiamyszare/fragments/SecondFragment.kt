@@ -1,19 +1,18 @@
 package com.elephantstudio.odrabiamyszare.fragments
 
-import android.content.Context
+import android.app.Dialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
 import com.elephantstudio.odrabiamyszare.R
 import com.elephantstudio.odrabiamyszare.databinding.FragmentSecondBinding
-import com.google.android.material.internal.ContextUtils.getActivity
+import com.elephantstudio.odrabiamyszare.databinding.PagePickerDialogBinding
 import com.google.android.material.tabs.TabLayout
-import kotlinx.coroutines.NonCancellable.message
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -41,6 +40,12 @@ class SecondFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
+        val pagePickerDialog = Dialog(requireContext())
+        val dialogBinding = PagePickerDialogBinding.inflate(LayoutInflater.from(requireContext()))
+        var pageList = intArrayOf(1,2,3,4,5,6,7)
+
+        var pageListString = pageList.map { it.toString() }.toTypedArray()
+
 
 
         var exerciseNumbers = listOf<Int>(1,2,3,4,5,6,7,8)
@@ -49,7 +54,48 @@ class SecondFragment : Fragment() {
             binding.tabLayout.addTab(binding.tabLayout.newTab().setText(it.toString()))
         }
 
+
        binding.tabLayout.addOnTabSelectedListener(OnTabSelectedListener())
+
+
+
+       var pageValue = pageList[0]
+       binding.bookPageTv.text = pageValue.toString()
+        var buttonRemove = binding.buttonRemove
+        var buttonAdd = binding.buttonAdd
+
+
+        buttonAdd.setOnClickListener{
+            pageValue++
+            binding.bookPageTv.text = pageValue.toString()
+        }
+
+
+        buttonRemove.setOnClickListener {
+            pageValue--
+            binding.bookPageTv.text = pageValue.toString()
+        }
+
+        binding.bookPageTv.setOnClickListener {
+            pagePickerDialog.show()
+            pagePickerDialog.setContentView(dialogBinding.root)
+
+        }
+
+        dialogBinding.numberPicker.setMinValue(1);
+        dialogBinding.numberPicker.setMaxValue(pageList.size)
+        dialogBinding.numberPicker.setDisplayedValues(pageListString)
+        dialogBinding.dialogButton.setOnClickListener {
+            pageValue = dialogBinding.numberPicker.getValue()
+            binding.bookPageTv.text = pageValue.toString()
+            pagePickerDialog.dismiss()
+        }
+
+
+
+
+
+
 
 
 
@@ -68,7 +114,7 @@ class SecondFragment : Fragment() {
 private class OnTabSelectedListener: TabLayout.OnTabSelectedListener{
     override fun onTabSelected(tab: TabLayout.Tab?) {
         val tabName = tab?.text
-        Toast.makeText(requireActivity(), tabName, Toast.LENGTH_LONG).show();
+
     }
 
     override fun onTabUnselected(tab: TabLayout.Tab?) {}
